@@ -5,8 +5,6 @@ import { hash } from "@/lib/encryption";
 import { FREE_QUOTA, PRO_QUOTA } from "@/config";
 import { DiscordClient } from "@/lib/discord-client";
 
-export const maxDuration = 300;
-
 export const POST = async (req: NextRequest) => {
   const authHeader = req.headers.get("Authorization");
 
