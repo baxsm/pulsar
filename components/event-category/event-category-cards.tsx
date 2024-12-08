@@ -113,10 +113,7 @@ const EventCategoryCards: FC = () => {
             >
               View all <ArrowRight className="size-4" />
             </Link>
-            <DeleteEventCategory
-              name={category.name}
-              eventCategoryId={category.id}
-            />
+            <DeleteEventCategory name={category.name} />
           </div>
         </Card>
       ))}
