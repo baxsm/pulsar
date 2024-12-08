@@ -1,10 +1,6 @@
 import { FC } from 'react'
 
-interface DashboardProps {
-  
-}
-
-const Dashboard: FC<DashboardProps> = ({}) => {
+const Dashboard: FC = () => {
   return <div>Dashboard</div>
 }
 

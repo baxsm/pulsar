@@ -25,10 +25,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Cog, Loader2, Save } from "lucide-react";
-import {
-  updateDiscordChannelId,
-  updateDiscordUserId,
-} from "@/actions/integration";
+import { updateDiscordChannelId } from "@/actions/integration";
 import Link from "next/link";
 import {
   discordChannelFormSchema,
@@ -115,7 +112,10 @@ const DiscordChannelForm: FC<DiscordChannelFormProps> = ({ token }) => {
 
             <FormItem className="flex flex-col gap-2 pt-2">
               <FormLabel>3. Invite to Channel (Optional)</FormLabel>
-              <p className="text-sm text-muted-foreground">Invite Pulsar to your private channel. Access will be required before we are able to send a message.</p>
+              <p className="text-sm text-muted-foreground">
+                Invite Pulsar to your private channel. Access will be required
+                before we are able to send a message.
+              </p>
             </FormItem>
 
             <div className="pt-4">

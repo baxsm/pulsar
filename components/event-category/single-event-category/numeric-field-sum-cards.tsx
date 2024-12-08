@@ -7,9 +7,7 @@ import { isAfter, isToday, startOfMonth, startOfWeek } from "date-fns";
 import { BarChart } from "lucide-react";
 import { FC, useMemo } from "react";
 
-interface NumericFieldSumCardsProps {}
-
-const NumericFieldSumCards: FC<NumericFieldSumCardsProps> = ({}) => {
+const NumericFieldSumCards: FC = () => {
   const { eventData, isDataLoading, activeTab } = useEventCategoryStore();
 
   const numericFieldSums = useMemo(() => {
