@@ -1,0 +1,188 @@
+export const generateApiIdentifier = (): string => {
+  const adjectives = [
+    "Tall",
+    "Fine",
+    "Short",
+    "Smart",
+    "Clever",
+    "Quiet",
+    "Brave",
+    "Loud",
+    "Bright",
+    "Dark",
+    "Fast",
+    "Swift",
+    "Kind",
+    "Sharp",
+    "Bold",
+    "Witty",
+    "Chilly",
+    "Calm",
+    "Stormy",
+    "Lazy",
+    "Mighty",
+    "Fierce",
+    "Gentle",
+    "Strong",
+    "Cool",
+    "Wild",
+    "Jolly",
+    "Proud",
+    "Epic",
+    "Golden",
+    "Warm",
+    "Cheerful",
+    "Vast",
+    "Fearless",
+    "Crafty",
+    "Humble",
+    "Steady",
+    "Optimistic",
+    "Lively",
+    "Energetic",
+    "Zesty",
+    "Timid",
+    "Gloomy",
+    "Happy",
+    "Vivid",
+    "Free",
+    "Majestic",
+    "Glorious",
+    "Quirky",
+    "Daring",
+    "Luminous",
+  ];
+
+  const nouns = [
+    "Crow",
+    "Fox",
+    "Bear",
+    "Wolf",
+    "Tiger",
+    "Lion",
+    "Eagle",
+    "Shark",
+    "Turtle",
+    "Cat",
+    "Hawk",
+    "Falcon",
+    "Panther",
+    "Dragon",
+    "Phoenix",
+    "Buffalo",
+    "Leopard",
+    "Whale",
+    "Cobra",
+    "Dolphin",
+    "Raven",
+    "Stag",
+    "Horse",
+    "Zebra",
+    "Rabbit",
+    "Wolfhound",
+    "Otter",
+    "Badger",
+    "Snake",
+    "Moose",
+    "Bat",
+    "Frog",
+    "Panda",
+    "Owl",
+    "Duck",
+    "Hyena",
+    "Pelican",
+    "Penguin",
+    "Chameleon",
+    "Jay",
+    "Swallow",
+    "Condor",
+    "Seal",
+    "Mongoose",
+    "Lynx",
+    "Cheetah",
+    "Kangaroo",
+    "Wolfie",
+    "Swan",
+    "Ferret",
+    "Wolverine",
+  ];
+
+  const suffixes = [
+    "Zaroll",
+    "Tie",
+    "Storm",
+    "Quest",
+    "Fire",
+    "Blade",
+    "Bolt",
+    "Arrow",
+    "Moon",
+    "Rock",
+    "Light",
+    "Glint",
+    "Wing",
+    "Flame",
+    "Soul",
+    "Heart",
+    "Shade",
+    "Core",
+    "Leaf",
+    "Fang",
+    "Roar",
+    "Claw",
+    "Whisper",
+    "Pulse",
+    "Ray",
+    "Frost",
+    "Blaze",
+    "Spark",
+    "Star",
+    "Echo",
+    "Drift",
+    "Thorn",
+    "Wind",
+    "Gale",
+    "Burst",
+    "Edge",
+    "Beam",
+    "Glow",
+    "Shard",
+    "Shadow",
+    "Comet",
+    "Haven",
+    "Surge",
+    "Veil",
+    "Rune",
+    "Path",
+    "Vortex",
+    "Crest",
+    "Bluff",
+    "Crown",
+  ];
+
+  function randomFromArray<T>(arr: T[]): T {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function getRandomDigits(length: number): string {
+    const digits = [];
+    for (let i = 0; i < length; i++) {
+      digits.push(Math.floor(Math.random() * 10));
+    }
+    return digits.join("");
+  }
+
+  function toLowerCase(input: string): string {
+    return input.toLowerCase();
+  }
+
+  const adjective = toLowerCase(randomFromArray(adjectives));
+  const noun = toLowerCase(randomFromArray(nouns));
+  const suffix = toLowerCase(randomFromArray(suffixes));
+
+  const randomDigitsLength = 7;
+  const randomDigits = getRandomDigits(randomDigitsLength);
+
+  const uniqueName = `${adjective}-${noun}-${suffix}-${randomDigits}`;
+  return uniqueName;
+};

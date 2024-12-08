@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+model User {
+  id      String  @id @default(cuid())
+  clerkId String? @unique
+
+  quotaLimit Int
+  plan       Plan   @default(FREE)
+  email      String @unique
+
+  apiKeyList        ApiKey[]
+  eventCategoryList EventCategory[]
+  eventList         Event[]
+  quotaList         Quota[]
+  integrationList   Integration[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([clerkId, email])
+}
+
+enum IntegrationType {
+  DISCORD_DM
+  DISCORD_CHANNEL
+  SLACK
+}
+
+model Integration {
+  id String @id @default(cuid())
+
+  type IntegrationType @default(DISCORD_DM)
+
+  isActive Boolean @default(true)
+
+  token String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([type, userId])
+  @@index([type])
+}
+
+model ApiKey {
+  id String @id @default(cuid())
+
+  title      String
+  identifier String @unique
+
+  encryptedKey String @unique
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  eventList Event[]
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([identifier, userId])
+  @@index([identifier, encryptedKey])
+}
+
+model EventCategory {
+  id String @id @default(cuid())
+
+  name  String
+  color Int
+  emoji String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  eventList Event[]
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([name, userId])
+  @@index([name])
+}
+
+enum EventStatus {
+  PENDING
+  DELIVERED
+  FAILED
+}
+
+model Event {
+  id String @id @default(cuid())
+
+  name             String
+  formattedMessage String
+  fields           Json
+
+  status EventStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  EventCategory   EventCategory? @relation(fields: [eventCategoryId], references: [id])
+  eventCategoryId String?
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  ApiKey   ApiKey? @relation(fields: [apiKeyId], references: [id])
+  apiKeyId String?
+
+  @@index([createdAt])
+}
+
+model Quota {
+  id String @id @default(cuid())
+
+  year  Int
+  month Int
+  count Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([userId, year, month])
+}
