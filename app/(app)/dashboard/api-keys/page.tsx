@@ -1,4 +1,5 @@
 import AllApiKeysCards from "@/components/api-keys/all-api-keys-cards";
+import ApiRecentEvents from "@/components/api-keys/api-recent-events";
 import CreateApiKeyDialog from "@/components/api-keys/create-api-key-dialog";
 import {
   Card,
@@ -27,7 +28,7 @@ const ApiKeys: FC = () => {
       </div>
       <div className="flex flex-col gap-4 w-full max-w-sm">
         <CreateApiKeyDialog />
-        {/* More analytics about api keys */}
+        <ApiRecentEvents />
       </div>
     </div>
   );

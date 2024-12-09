@@ -52,7 +52,7 @@ const AllApiKeysCards: FC = () => {
     <div className="flex flex-col gap-4">
       {data.map((apiKey) => (
         <Card key={apiKey.identifier}>
-          <CardHeader className="space-y-0 flex flex-row items-center justify-between gap-2">
+          <CardHeader className="space-y-0 flex flex-row justify-between gap-2">
             <div className="flex flex-col space-y-1.5">
               <CardTitle className="text-xl font-semibold tracking-tight">
                 {apiKey.title}
@@ -61,7 +61,7 @@ const AllApiKeysCards: FC = () => {
                 {moment(apiKey.createdAt).format("DD MMM, YYYY h:mm A")}
               </p>
             </div>
-            <Badge variant="outline">{apiKey.identifier}</Badge>
+            <Badge variant="outline" className="h-fit">{apiKey.identifier}</Badge>
           </CardHeader>
           <CardContent className="bg-accent/40 pb-0 py-4 rounded-bl-lg rounded-br-lg">
             <div className="w-full h-full flex items-center justify-between gap-2">

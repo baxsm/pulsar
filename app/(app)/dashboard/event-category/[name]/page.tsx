@@ -31,7 +31,11 @@ const Page: FC<PageProps> = async ({ params }) => {
   const hasNoEvents = category?._count.eventList === 0;
 
   return hasNoEvents ? (
-    <EmptyCategoryState categoryName={category.name} />
+    <div className="flex flex-col-reverse lg:flex-row gap-4 w-full min-h-full">
+      <div className="flex w-full">
+        <EmptyCategoryState categoryName={category.name} />
+      </div>
+    </div>
   ) : (
     <div className="flex flex-col-reverse lg:flex-row gap-4 w-full min-h-full">
       <div className="flex w-full">

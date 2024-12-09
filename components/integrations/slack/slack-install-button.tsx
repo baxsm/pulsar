@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Workflow } from "lucide-react";
 import { FC } from "react";
 
-const SlackInstallButton: FC = ({}) => {
+const SlackInstallButton: FC = () => {
   const handleClick = () => {
     const SLACK_OAUTH_URL = "https://slack.com/oauth/v2/authorize";
 

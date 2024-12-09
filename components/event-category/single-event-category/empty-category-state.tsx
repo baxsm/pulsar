@@ -41,7 +41,7 @@ const EmptyCategoryState = ({ categoryName }: { categoryName: string }) => {
 })`;
 
   return (
-    <Card className="flex-1 flex flex-col items-center justify-center p-6">
+    <Card className="flex-1 flex flex-col items-center justify-center p-6 shadow-none border-none">
       <h2 className="text-xl font-medium text-center tracking-tight">
         Create your first <b>&quot;{categoryName}&quot;</b> event
       </h2>

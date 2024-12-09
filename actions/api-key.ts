@@ -136,3 +136,29 @@ export const deleteApiKey = async (identifier: string) => {
     },
   });
 };
+
+export const getRecentApiKeyEvents = async () => {
+  const dbUser = await getDbUser();
+
+  const events = await prisma.event.findMany({
+    where: {
+      userId: dbUser.id,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+    take: 5,
+    select: {
+      id: true,
+      ApiKey: {
+        select: {
+          identifier: true,
+        },
+      },
+      name: true,
+      updatedAt: true,
+    },
+  });
+
+  return events;
+};

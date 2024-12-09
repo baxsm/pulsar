@@ -1,4 +1,6 @@
+import { Period } from "@/types/analytics";
 import { clsx, type ClassValue } from "clsx";
+import { endOfMonth, startOfMonth } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -21,4 +23,11 @@ export const parseColorToInt = (color: string) => {
 
 export const parseColorToString = (color: number) => {
   return color.toString(16).padStart(6, "0");
+};
+
+export const periodToDateRange = (period: Period) => {
+  const startDate = startOfMonth(new Date(period.year, period.month));
+  const endDate = endOfMonth(new Date(period.year, period.month));
+
+  return { startDate, endDate };
 };

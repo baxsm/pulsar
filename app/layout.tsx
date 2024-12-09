@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Poppins } from "next/font/google";
+import { EB_Garamond } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import AppProviders from "@/components/providers/app-providers";
 
 import "./globals.css";
 
-const poppins = Poppins({
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const eb_garamond = EB_Garamond({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -31,8 +33,8 @@ export default function RootLayout({
         },
       }}
     >
-      <html lang="en">
-        <body className={cn("font-sans antialiased", poppins.className)}>
+      <html lang="en" className={cn(inter.variable, eb_garamond.variable)}>
+        <body className="font-sans antialiased">
           <AppProviders>{children}</AppProviders>
         </body>
       </html>

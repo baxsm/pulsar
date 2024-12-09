@@ -148,6 +148,7 @@ export const POST = async (req: NextRequest) => {
       userId: validApiKey?.User?.id,
       fields: eventRequestData.fields || {},
       eventCategoryId: category.id,
+      apiKeyId: validApiKey.id,
     },
   });
 
