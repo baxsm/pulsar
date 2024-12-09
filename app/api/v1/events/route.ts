@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import { hash } from "@/lib/encryption";
 import { FREE_QUOTA, PRO_QUOTA } from "@/config";
 import { DiscordClient } from "@/lib/discord-client";
+import axios from "axios";
 
 export const POST = async (req: NextRequest) => {
   const authHeader = req.headers.get("Authorization");
@@ -203,8 +204,60 @@ export const POST = async (req: NextRequest) => {
       }
 
       const discord = new DiscordClient(process.env.DISCORD_BOT_TOKEN!);
-      
+
       await discord.sendEmbed(discordIntegration.token, eventData);
+    } else if (eventRequestData.integration === "slack") {
+      const slackIntegration = await prisma.integration.findUnique({
+        where: {
+          type_userId: {
+            type: "SLACK",
+            userId: validApiKey.User.id,
+          },
+        },
+      });
+
+      if (
+        !slackIntegration ||
+        !slackIntegration.isActive ||
+        !slackIntegration.token ||
+        !slackIntegration.slackChannelId
+      ) {
+        return NextResponse.json(
+          { message: "Slack integration is not set up" },
+          { status: 400 }
+        );
+      }
+
+      const formattedMarkdownMessage = `
+*${eventData.title}*
+
+${eventData.description}
+
+*Fields:*
+${eventData.fields
+  .map((field) => `- *${field.name}:* ${field.value}`)
+  .join("\n")}
+
+*Timestamp:* ${eventData.timestamp}
+`;
+
+      const response = await axios.post(
+        "https://slack.com/api/chat.postMessage",
+        {
+          channel: slackIntegration.slackChannelId,
+          text: formattedMarkdownMessage,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${slackIntegration.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.data || !response.data.ok) {
+        throw new Error("Unable to send message to slack channel");
+      }
     }
 
     await prisma.event.update({
@@ -246,7 +299,7 @@ export const POST = async (req: NextRequest) => {
       },
     });
 
-    console.log(error);
+    console.error(error);
 
     return NextResponse.json(
       { message: "Error processing event", eventId: event.id },

@@ -1,5 +1,6 @@
 import DiscordChannelIntegrationChannel from "@/components/integrations/discord-channel/discord-channel-integration-card";
 import DiscordDmIntegrationCard from "@/components/integrations/discord-dm/discord-dm-integration-card";
+import SlackIntegrationCard from "@/components/integrations/slack/slack-integration-card";
 import {
   Card,
   CardContent,
@@ -25,6 +26,7 @@ const Integrations: FC = () => {
             <div className="grid lg:grid-cols-2 gap-4">
               <DiscordDmIntegrationCard />
               <DiscordChannelIntegrationChannel />
+              <SlackIntegrationCard />
             </div>
           </CardContent>
         </Card>

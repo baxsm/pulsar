@@ -11,3 +11,9 @@ export const discordChannelFormSchema = z.object({
 });
 
 export type DiscordChannelFormSchemaType = z.infer<typeof discordChannelFormSchema>;
+
+export const slackChannelFormSchema = z.object({
+  channelId: z.string(),
+});
+
+export type SlackChannelFormSchemaType = z.infer<typeof slackChannelFormSchema>;

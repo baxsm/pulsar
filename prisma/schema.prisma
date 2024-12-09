@@ -47,6 +47,8 @@ model Integration {
 
   token String?
 
+  slackChannelId String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
