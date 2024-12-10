@@ -6,7 +6,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC } from "react";
 
-const DashboardNavigationLinks: FC = () => {
+interface DashboardNavigationLinksProps {
+  onClick?: () => void;
+}
+
+const DashboardNavigationLinks: FC<DashboardNavigationLinksProps> = ({
+  onClick,
+}) => {
   const pathname = usePathname();
 
   const activeRoute = dashboardLinks.reduce((bestMatch, route) => {
@@ -20,7 +26,7 @@ const DashboardNavigationLinks: FC = () => {
   }, dashboardLinks[0] || null);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-0">
+    <div className="flex flex-col lg:flex-row gap-2 lg:gap-0">
       {dashboardLinks.map((item) => {
         const isActive = activeRoute.href === item.href;
 
@@ -29,9 +35,10 @@ const DashboardNavigationLinks: FC = () => {
             key={item.name}
             href={item.href}
             className={cn(
-              "flex items-center gap-2 text-sm font-semibold text-muted-foreground px-4 rounded-lg py-2",
+              "flex items-center gap-2 text-xl lg:text-sm font-semibold text-muted-foreground px-4 rounded-lg py-2",
               isActive && "text-foreground"
             )}
+            onClick={onClick}
           >
             <div
               className={cn(

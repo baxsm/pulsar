@@ -128,7 +128,5 @@ export const getEventsStats = async (selectedPeriod: Period) => {
     ...info,
   }));
 
-  console.log("@RESULT", result)
-
   return result;
 };
